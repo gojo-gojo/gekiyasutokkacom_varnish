@@ -23,9 +23,9 @@ sub vcl_recv {
 }
 
 sub vcl_backend_response {
-  if (bereq.url ~"/page/"){
+  if (bereq.url ~ "/page/" || bereq.url ~ "^/$" || bereq.url ~ "^/feed/") {
     set beresp.ttl = 300s;
-  }else{
+  } else {
     set beresp.ttl = 10d;
   }
 
